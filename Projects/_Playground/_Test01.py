@@ -5,7 +5,24 @@ install()
 
 if __name__ == '__main__':
 	# Code here Executed when invoked directly (Not a module)
-	with open("test.exe", "rb") as bin_file:
-		file_contents = bin_file.read()
-	with open("new_file.exe", "wb") as new_file:
-		new_file.write(file_contents)
+
+	def update_results(*args):
+		with open('Results.txt', 'a') as results_file:
+			results_file.write(f'{args[0]}={args[1]}\n')
+		return
+
+	def return_false():
+		return False
+
+	def return_true():
+		return True
+
+	code = "test01"
+	update_results(code, return_true())
+
+	code = "test02"
+	update_results(code, return_false())
+
+else:
+	# Code here executed when imported (As a module)
+	pass
