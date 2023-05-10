@@ -56,8 +56,7 @@ if __name__ == '__main__':
 			code_input = wait.until(condition.presence_of_element_located((By.ID, 'promocode_input')))
 		except:
 			exit('Could not find code input field')
-		code_input.clear()
-		code_input.send_keys(code)
+		code_input.clear().send_keys(code)
 		wait.until(condition.element_to_be_clickable((By.ID, 'btnSubmit'))).click()
 		wait.until(condition.presence_of_element_located((By.CLASS_NAME, 'submitted')))
 		time.sleep(1)
