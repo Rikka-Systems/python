@@ -1,6 +1,4 @@
 # Code here is always executed
-# from _imports.timer import timer
-# from _imports.debug import debug
 from rich.traceback import install
 
 install()
@@ -27,9 +25,13 @@ if __name__ == '__main__':
 		date_length = 8
 		try:
 			start_char = re.search(r'\d{8}', file_path).span()[0]
-		except:
-			start_char = re.search(r'\d{6}', file_path).span()[0]
-			date_length = 6
+		except AttributeError:
+			try:
+				start_char = re.search(r'\d{6}', file_path).span()[0]
+			except AttributeError:
+				continue
+			else:
+				date_length = 6
 
 		month = file_path[start_char: start_char + 2]
 		day = file_path[start_char + 2: start_char + 4]

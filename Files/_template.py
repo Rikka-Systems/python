@@ -6,10 +6,9 @@ install()
 if __name__ == '__main__':
 	# Code here Executed when invoked directly (Not a module)
 	def hello_world():
-		print('Hello World')
-		return
+		return 'Hello World'
 
-	hello_world()
+	print(hello_world())
 
 else:
 	# Code here executed when imported (As a module)

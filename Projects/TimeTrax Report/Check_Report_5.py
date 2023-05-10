@@ -1,7 +1,7 @@
 # Code here is always executed
-from rich.traceback import install
+# from rich.traceback import install
 
-install()
+# install()
 
 if __name__ == '__main__':
 	# Code here Executed when invoked directly (Not a module)
@@ -22,10 +22,9 @@ if __name__ == '__main__':
 					if len(row) == 3:
 						if "Missed Out" in row:
 							staff_names = report_names.get(row[1])
-							staff_names.add(row[0].strip())
 							try:
 								staff_names.add(row[0].strip())
-							except:
+							except AttributeError:
 								staff_names = {row[0].strip()}
 
 							report_names.update({row[1]: staff_names})
@@ -56,7 +55,7 @@ if __name__ == '__main__':
 					offender = ",".join(row)
 					try:
 						offenders.update({offender: offenders.get(offender)+1})
-					except:
+					except TypeError:
 						offenders.update({offender: 1})
 
 		offenders = dict(sorted(offenders.items(), key=lambda x: x[1], reverse=True))
@@ -78,5 +77,5 @@ if __name__ == '__main__':
 	offense_count()
 
 else:
-	# Code here executed when imported (As a module))
+	# Code here executed when imported (As a module)
 	pass
