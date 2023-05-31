@@ -11,3 +11,4 @@ if __name__ == '__main__':
 
 	with open('D:/My Drive/Python/Projects/Lorem Ipsum/LoremIpsum.txt') as lorem:
 		lines = 4
+		# TODO Finish code
