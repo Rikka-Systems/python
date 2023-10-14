@@ -11,19 +11,31 @@ if __name__ == '__main__':
 	import time
 
 	# Load the existing JPG image
-	existing_image = cv2.imread('C:\\Users\\Loki\\Documents\\ShareX\\Screenshots\\2023-10\\hammer.jpg')
+	existing_image = cv2.imread('./sample.jpg')
 
 	# Define a threshold for a "match"
 	threshold = 0.35  # You may need to adjust this value
 
-	while True:
-		# Take a screenshot of the left half of your 1080p monitor
-		screen_width, screen_height = pyautogui.size()
-		left_half_width = screen_width // 2
-		top_half_height = screen_height // 2
+	# Define loop delay between captures
+	sleep_time = 1
 
-		# Capture the left half of the screen
-		screenshot = pyautogui.screenshot(region=(0, 0, left_half_width, top_half_height))
+	def concede():
+		pyautogui.click(1882, 34)
+		time.sleep(.065)
+		pyautogui.mouseDown(955, 631)
+		time.sleep(.001)
+		pyautogui.mouseUp()
+		time.sleep(4)
+		pyautogui.click()
+
+	while True:
+		# Set region of capture
+		screen_width, screen_height = pyautogui.size()
+		x_start, y_start = 0, 0
+		x_end, y_end = screen_width // 2, screen_height // 2
+
+		# Capture screen region defined above
+		screenshot = pyautogui.screenshot(region=(x_start, y_start, x_end, y_end))
 		screenshot = np.array(screenshot)
 		screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
 
@@ -34,12 +46,14 @@ if __name__ == '__main__':
 		locations = np.where(result >= threshold)
 
 		if len(locations[0]) > 0:
-			print("hammer time")
-		else:
-			print("No match found")
+			print("Match")
+			concede()
 
-		# Wait for half a second before taking the next screenshot
-		time.sleep(1)
+		else:
+			print("No Match")
+
+		# Wait for time before taking the next screenshot
+		time.sleep(sleep_time)
 
 else:
 	# Code here executed when imported (As a module)
