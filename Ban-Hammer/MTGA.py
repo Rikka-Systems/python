@@ -11,10 +11,10 @@ if __name__ == '__main__':
 	import time
 
 	# Load the existing JPG image
-	existing_image = cv2.imread('./sample.jpg')
+	existing_image = cv2.imread('./sample.png')
 
 	# Define a threshold for a "match"
-	threshold = 0.35  # You may need to adjust this value
+	threshold = 0.95  # You may need to adjust this value
 
 	# Define loop delay between captures
 	sleep_time = 1
