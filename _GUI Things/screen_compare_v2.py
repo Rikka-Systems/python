@@ -5,11 +5,11 @@ install()
 
 if __name__ == '__main__':
 	# Code here Executed when invoked directly (Not a module)
-	import pyautogui as gui
-	from time import sleep
+	import pyautogui
+	import time
 
 	# Load the existing JPG image
-	banned_card = './sample.png'
+	existing_image = './hammer.png'
 
 	# Define a threshold for a "match"
 	threshold = 0.95  # You may need to adjust this value
@@ -17,24 +17,14 @@ if __name__ == '__main__':
 	# Define loop delay between captures
 	sleep_time = 1
 
-	def concede():
-		gui.click(1882, 34)
-		sleep(.065)
-		gui.mouseDown(955, 631)
-		sleep(.001)
-		gui.mouseUp()
-		sleep(4)
-		gui.click()
-
 	while True:
-		if gui.locateOnScreen(banned_card, confidence=threshold):
-			print("Match")
-			concede()
+		if matched := pyautogui.locateOnScreen(existing_image, confidence=threshold):
+			print(matched)
 		else:
-			print("No Match")
+			print('None')
 
 		# Wait for time before taking the next screenshot
-		sleep(sleep_time)
+		time.sleep(sleep_time)
 
 else:
 	# Code here executed when imported (As a module)
