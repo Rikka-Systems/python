@@ -11,7 +11,7 @@ if __name__ == '__main__':
 	import time
 
 	# Load the existing JPG image
-	existing_image = cv2.imread('hammer.png')
+	existing_image = cv2.imread('../cards/hammer.png')
 
 	# Define a threshold for a "match"
 	threshold = 0.95  # You may need to adjust this value

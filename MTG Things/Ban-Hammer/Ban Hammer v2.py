@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
 	def concede():
 		gui.click(1882, 34)
-		sleep(.065)
+		sleep(.1)
 		gui.mouseDown(955, 631)
 		sleep(.001)
 		gui.mouseUp()

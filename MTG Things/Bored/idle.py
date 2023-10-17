@@ -9,14 +9,14 @@ if __name__ == '__main__':
 	from time import sleep
 
 	def check_discard():
-		if gui.locateOnScreen('./discard.png'):
+		if gui.locateOnScreen('./discard.png', confidence=threshold):
 			gui.doubleClick(945, 1019)
 
 	# Load the existing PNG image
 	but_resolve = './resolve.png'
 
 	# Define a threshold for a "match"
-	threshold = 0.99  # You may need to adjust this value
+	threshold = 0.95  # You may need to adjust this value
 
 	# Define loop delay between captures
 	sleep_time = .25
@@ -24,6 +24,7 @@ if __name__ == '__main__':
 	while True:
 		check_discard()
 		gui.click(1776, 948)
+
 		sleep(sleep_time)
 
 else:
