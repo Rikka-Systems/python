@@ -54,11 +54,29 @@ if __name__ == '__main__':
 			concede()
 		return
 
+	def auto_play(mode_state):
+		if mode_state:
+			pass
+		else:
+			return
+		if gui.locateOnScreen('./buttons/play.png', confidence=0.90):
+			gui.mouseDown(1738, 1003)
+			sleep(.001)
+			gui.mouseUp()
+		if gui.locateOnScreen('./buttons/claim.png', confidence=0.90):
+			gui.mouseDown(1738, 1003)
+			sleep(.001)
+			gui.mouseUp()
+		return
+
+
 	ban_toggle = False
 	hello_toggle = False
+	play_toggle = False
 	while True:
 		check_banned(ban_toggle)
 		hello_concede(hello_toggle)
+		auto_play(play_toggle)
 
 		# Press 1 to concede
 		if keyboard.is_pressed('1'):
@@ -79,6 +97,14 @@ if __name__ == '__main__':
 			else:
 				hello_toggle = True
 			print(f'Hello Mode: {hello_toggle}')
+		# Press 4 to toggle autoplay
+		if keyboard.is_pressed('4'):
+			sleep(.2)
+			if play_toggle:
+				play_toggle = False
+			else:
+				play_toggle = True
+			print(f'Autoplay Mode: {play_toggle}')
 
 else:
 	# Code here executed when imported (As a module)
