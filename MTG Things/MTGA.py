@@ -1,4 +1,6 @@
 # Code here is always executed
+import random
+
 from rich.traceback import install
 
 install()
@@ -43,15 +45,29 @@ if __name__ == '__main__':
 		for card in cards:
 			if gui.locateOnScreen(f'{cards_path}/{card}', confidence=0.90):
 				concede()
+				sleep(1)
 		return
 
-	def hello_concede(mode_state):
+	def auto_draft(mode_state):
 		if mode_state:
 			pass
 		else:
 			return
-		if gui.locateOnScreen('./buttons/hello.png', confidence=0.99):
-			concede()
+		if gui.locateOnScreen('./buttons/draft.png', confidence=0.95):
+			draft_pick = random.randint(1, 3)
+			match draft_pick:
+				case 1:
+					gui.mouseDown(630, 476)
+					sleep(.001)
+					gui.mouseUp()
+				case 2:
+					gui.mouseDown(955, 476)
+					sleep(.001)
+					gui.mouseUp()
+				case 3:
+					gui.mouseDown(1287, 476)
+					sleep(.001)
+					gui.mouseUp()
 		return
 
 	def auto_play(mode_state):
@@ -70,41 +86,44 @@ if __name__ == '__main__':
 		return
 
 
-	ban_toggle = False
-	hello_toggle = False
 	play_toggle = False
+	draft_toggle = False
+	ban_toggle = False
 	while True:
-		check_banned(ban_toggle)
-		hello_concede(hello_toggle)
 		auto_play(play_toggle)
+		auto_draft(draft_toggle)
+		check_banned(ban_toggle)
 
-		# Press 1 to concede
-		if keyboard.is_pressed('1'):
+		# Press 0 to concede
+		if keyboard.is_pressed('0'):
 			concede()
-		# Press 2 to toggle banned card checking
-		if keyboard.is_pressed('2'):
-			sleep(.2)
-			if ban_toggle:
-				ban_toggle = False
-			else:
-				ban_toggle = True
-			print(f'Ban Mode: {ban_toggle}')
-		# Press 3 to toggle concede on "hello"
-		if keyboard.is_pressed('3'):
-			sleep(.2)
-			if hello_toggle:
-				hello_toggle = False
-			else:
-				hello_toggle = True
-			print(f'Hello Mode: {hello_toggle}')
-		# Press 4 to toggle autoplay
-		if keyboard.is_pressed('4'):
+
+		# Press 1 to toggle autoplay
+		if keyboard.is_pressed('1'):
 			sleep(.2)
 			if play_toggle:
 				play_toggle = False
 			else:
 				play_toggle = True
 			print(f'Autoplay Mode: {play_toggle}')
+
+		# Press 2 to toggle autodraft
+		if keyboard.is_pressed('2'):
+			sleep(.2)
+			if draft_toggle:
+				draft_toggle = False
+			else:
+				draft_toggle = True
+			print(f'Autodraft Mode: {draft_toggle}')
+
+		# Press 9 to toggle banned card checking
+		if keyboard.is_pressed('9'):
+			sleep(.2)
+			if ban_toggle:
+				ban_toggle = False
+			else:
+				ban_toggle = True
+			print(f'Ban Mode: {ban_toggle}')
 
 else:
 	# Code here executed when imported (As a module)
